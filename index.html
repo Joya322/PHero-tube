@@ -1,11 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PHero Tube</title>
-</head>
-<body>
-    <h1>Welcome to PHero Tube</h1>
-</body>
+
+    <!-- daisyUI CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@4.10.1/dist/full.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- custom tailwind -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "not-clicked": {
+                multiple: "rgba(37,37,37,0.15)",
+                one: "rgba(37,37,37,0.2)",
+              },
+              clicked: "#FF1F3D",
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- font awesome cdn -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- google font Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- custom css -->
+    <style>
+      *{
+        font-family: "Inter", sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- header section -->
+    <header class="max-w-[1300px] mx-auto mt-6">
+      <nav class="flex justify-between">
+        <!-- logo -->
+        <img src="./pictures/Logo.png" alt="logo" />
+        <button class="btn bg-not-clicked-one font-medium text-lg">Sort by view</button>
+        <button class="btn bg-clicked text-white font-medium text-lg">Blog</button>
+      </nav>
+      <div class="border border-[rgba(23,23,23,0.2)] my-7"></div>
+    </header>
+
+    <!-- main section -->
+    <main class="max-w-[1300px] mx-auto mt-4">
+      <!-- category menu section -->
+      <section>
+        <div id="category" class="flex justify-center gap-6">
+          <!-- <button class="btn bg-not-clicked-multiple">All</button> -->
+        </div>
+      </section>
+
+      <!-- cards -->
+      <section>
+        <div id="cards" class="my-10 grid grid-cols-4 gap-5">
+          
+        </div>
+      </section>
+    </main>
+
+    <!-- js link -->
+    <script src="./js/api.js"></script>
+  </body>
 </html>
