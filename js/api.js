@@ -62,6 +62,7 @@ const loadCardsDetails = async (id = "1000") => {
 };
 
 const displayCards = (info) => {
+  console.log(info);
   // button active status
   const room = document.querySelector(".categoryBtns");
   const btns = document.querySelectorAll(".categoryBtn");
@@ -83,13 +84,15 @@ const displayCards = (info) => {
   const cards = document.getElementById("cards");
   // clear previous cards content
   cards.textContent = "";
-
+  
   if (info.length === 0) {
+    cards.textContent = "";
     cards.classList = `flex flex-col gap-8 justify-center h-[500px] items-center`;
     cards.innerHTML = `<img src="./pictures/Icon.png" alt="">
     <p class = "font-bold text-3xl">Oops!! Sorry, There is no content here</p>
     `;
   } else {
+    cards.textContent = "";
     cards.classList = `my-10 grid grid-cols-4 gap-5`;
     info.forEach((element) => {
       // create a div
@@ -115,20 +118,32 @@ const displayCards = (info) => {
                   ${element.title}
                 </h2>
                 <div class="flex gap-2 items-center my-2">
-                  <p id="name" class="flex-grow-0 font-normal text-sm text-[rgba(23,23,23,0.7)]">${element.authors[0].profile_name}</p>
-                  <i class="fa-solid fa-certificate text-blue-500"></i>
+                  <p id="name" class="flex-grow-0 font-normal text-sm text-[rgba(23,23,23,0.7)]">${
+                    element.authors[0].profile_name
+                  }</p>
+                  ${
+                    element.authors[0].verified === true ? (
+                      `<i class="verify fa-solid fa-certificate text-blue-500"></i>`
+                    ) : (
+                      `<i class="verify fa-solid fa-certificate text-blue-500 hidden"></i>`
+                    )
+                  }
+                  
                 </div>
-                <p class="font-normal text-sm text-[rgba(23,23,23,0.7)]">${element.others.views} views</p>
+                <p class="font-normal text-sm text-[rgba(23,23,23,0.7)]">${
+                  element.others.views
+                } views</p>
               </div>
             </div>
           </div>
         `;
-
       cards.appendChild(card);
     });
-  }
 
+
+  }
   toggleLoadingSpinner(false);
+
 };
 
 const toggleLoadingSpinner = (isLoading) => {
