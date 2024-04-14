@@ -49,37 +49,35 @@
 
     <!-- custom css -->
     <style>
-      *{
+      * {
         font-family: "Inter", sans-serif;
       }
     </style>
   </head>
   <body>
     <!-- header section -->
-    <header class="max-w-[1300px] mx-auto mt-6">
-      <nav class="flex justify-between">
-        <!-- logo -->
-        <img src="./pictures/Logo.png" alt="logo" />
-        <button class="btn bg-not-clicked-one font-medium text-lg">Sort by view</button>
-        <button class="btn bg-clicked text-white font-medium text-lg">Blog</button>
-      </nav>
-      <div class="border border-[rgba(23,23,23,0.2)] my-7"></div>
+    <header id="header">
+      
     </header>
 
     <!-- main section -->
     <main class="max-w-[1300px] mx-auto mt-4">
       <!-- category menu section -->
       <section>
-        <div id="category" class="flex justify-center gap-6">
+
+        <div id="category" class="categoryBtns flex justify-center gap-6">
           <!-- <button class="btn bg-not-clicked-multiple">All</button> -->
         </div>
       </section>
 
       <!-- cards -->
       <section>
-        <div id="cards" class="my-10 grid grid-cols-4 gap-5">
-          
+        
+        <!-- spinner -->
+        <div id="spinner" class="hidden text-center pt-[250px]">
+          <span class="loading loading-spinner loading-lg"></span>
         </div>
+        <div id="cards" class=""></div>
       </section>
     </main>
 

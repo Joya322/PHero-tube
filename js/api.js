@@ -1,5 +1,23 @@
+// get header section
+const header = document.getElementById("header");
+header.classList = `max-w-[1300px] mx-auto mt-6`;
+header.innerHTML = `
+  <nav class="flex justify-between">
+        <!-- logo -->
+        <img src="./pictures/Logo.png" alt="logo" />
+        <button class="btn bg-not-clicked-one font-medium text-lg">
+          Sort by view
+        </button>
+        <button onclick="blogPage()" id = "blogBtn" class="btn bg-clicked text-white font-medium text-lg">
+          Blog
+        </button>
+      </nav>
+      <div class="border border-[rgba(23,23,23,0.2)] my-7"></div>
+`;
+
 // data fetch
 const dataLoad = async () => {
+  toggleLoadingSpinner(true);
   const res = await fetch(
     `https://openapi.programming-hero.com/api/videos/categories`
   );
@@ -9,9 +27,6 @@ const dataLoad = async () => {
 };
 
 const displayCategories = (categories) => {
-  // categories.map(category=>console.log(category.category))
-  // console.log(categories);
-
   // get categories div
   const categoryDiv = document.getElementById("category");
 
@@ -19,18 +34,25 @@ const displayCategories = (categories) => {
     // create button
     const button = document.createElement("button");
 
-    button.classList = `btn bg-not-clicked-multiple font-semibold text-lg`;
-
+    if (category.category === "All") {
+      button.classList = `categoryBtn btn bg-clicked font-semibold text-lg text-white`;
+    } else {
+      button.classList = `categoryBtn btn bg-not-clicked-multiple font-semibold text-lg`;
+    }
+    button.setAttribute("onclick", `loadCardsDetails(${category.category_id})`);
+    button.setAttribute("id", `c${category.category_id}`);
     button.innerText = category.category;
 
     // append child
     categoryDiv.appendChild(button);
   });
 
+  toggleLoadingSpinner(false);
   loadCardsDetails();
 };
 
 const loadCardsDetails = async (id = "1000") => {
+  toggleLoadingSpinner(true);
   const res = await fetch(
     `https://openapi.programming-hero.com/api/videos/category/${id}`
   );
@@ -40,15 +62,41 @@ const loadCardsDetails = async (id = "1000") => {
 };
 
 const displayCards = (info) => {
+  // button active status
+  const room = document.querySelector(".categoryBtns");
+  const btns = document.querySelectorAll(".categoryBtn");
+
+  room.addEventListener("click", (event) => {
+    btns.forEach((btn) => {
+      if (btn.getAttribute("id") === event.target.getAttribute("id")) {
+        btn.classList.add("bg-clicked", "text-white");
+        btn.classList.remove("bg-not-clicked-multiple");
+      } else {
+        btn.classList.remove("bg-clicked", "text-white");
+        btn.classList.add("bg-not-clicked-multiple");
+      }
+    });
+  });
+
+  
   // get cards div
   const cards = document.getElementById("cards");
-  info.forEach((element) => {
-    console.log(element);
-    // create a div
-    const card = document.createElement("div");
-    card.classList = `card bg-base-100 shadow-xl`;
+  // clear previous cards content
+  cards.textContent = "";
 
-    card.innerHTML = `
+  if (info.length === 0) {
+    cards.classList = `flex flex-col gap-8 justify-center h-[500px] items-center`;
+    cards.innerHTML = `<img src="./pictures/Icon.png" alt="">
+    <p class = "font-bold text-3xl">Oops!! Sorry, There is no content here</p>
+    `;
+  } else {
+    cards.classList = `my-10 grid grid-cols-4 gap-5`;
+    info.forEach((element) => {
+      // create a div
+      const card = document.createElement("div");
+      card.classList = `card bg-base-100 shadow-xl`;
+
+      card.innerHTML = `
             
             <figure>
               <img class="w-[312px] h-[200px]"
@@ -75,9 +123,30 @@ const displayCards = (info) => {
             </div>
           </div>
         `;
-      
+
       cards.appendChild(card);
-  });
+    });
+  }
+
+  toggleLoadingSpinner(false);
+};
+
+const toggleLoadingSpinner = (isLoading) => {
+  // get spinner div
+  const spinner = document.getElementById("spinner");
+
+  if (isLoading) {
+    spinner.classList.remove("hidden");
+  } else {
+    spinner.classList.add("hidden");
+  }
+};
+
+// create navbar
+
+const blogPage = () => {
+  const url = `blog.html`;
+  window.open(url);
 };
 
 dataLoad();
