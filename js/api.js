@@ -1,11 +1,11 @@
 // create navbar
 // get header section
 const header = document.getElementById("header");
-header.classList = `max-w-[1300px] mx-auto mt-6`;
+header.classList = `max-w-[1300px] px-[100px] md:px-5 mx-auto mt-6`;
 header.innerHTML = `
-  <nav class="flex justify-between">
+  <nav class="flex flex-col md:flex-row items-center justify-between gap-5">
         <!-- logo -->
-        <img src="./pictures/Logo.png" alt="logo" />
+        <img class = "w-2/4 md:w-auto" src="./pictures/Logo.png" alt="logo" />
         <button id = "sortByView" class="btn bg-not-clicked-one font-medium text-lg">
           Sort by view
         </button>
@@ -46,6 +46,7 @@ const displayCategories = (categories) => {
 
     // append child
     categoryDiv.appendChild(button);
+    
   });
 
   toggleLoadingSpinner(false);
@@ -115,10 +116,10 @@ const createCard = (info) => {
   if (info.length === 0) {
     cards.classList = `flex flex-col gap-8 justify-center h-[500px] items-center`;
     cards.innerHTML = `<img src="./pictures/Icon.png" alt="">
-    <p class = "font-bold text-3xl">Oops!! Sorry, There is no content here</p>
+    <p class = "font-bold text-3xl text-center ">Oops!! Sorry, There is no content here</p>
     `;
   } else {
-    cards.classList = `my-10 grid grid-cols-4 gap-5`;
+    cards.classList = `my-10 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5 place-items-center`;
 
     // console.log(info);
 
@@ -147,7 +148,7 @@ const createCard = (info) => {
                 alt=""
                 />
                 <div class="">
-                <h2 class="card-title font-bold text-base">
+                <h2 class="card-title font-bold text-base md:text-sm lg:text-base">
                   ${element.title}
                 </h2>
                 <div class="flex gap-2 items-center my-2">
