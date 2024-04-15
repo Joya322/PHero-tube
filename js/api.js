@@ -60,7 +60,6 @@ const loadCardsDetails = async (id = "1000") => {
   const data = await res.json();
   const info = data.data;
   displayCards(info);
-  // console.log(info.length);
 };
 
 const displayCards = (info) => {
@@ -83,14 +82,11 @@ const displayCards = (info) => {
   // get sort by view button
   const sortByViewBtn = document.getElementById("sortByView");
   sortByViewBtn.addEventListener("click", () => {
-    // console.log(cards);
-    // console.log(info.length);
     function compareViews(a, b) {
       const c = a.others.views;
       const d = b.others.views;
       const e = c.substring(0, c.length - 1);
       const f = d.substring(0, d.length - 1);
-      // console.log(e,f);
       return e - f;
     }
 
@@ -101,8 +97,6 @@ const displayCards = (info) => {
   });
   createCard(info);
   toggleLoadingSpinner(false);
-  // console.log(info);
-  // console.log(typeof info);
 };
 
 // Card creating function
@@ -120,11 +114,6 @@ const createCard = (info) => {
   } else {
     cards.classList = `my-10 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5 place-items-center`;
 
-    // console.log(info);
-
-    // const newInfo = info;
-    // console.log(newInfo);
-
     info.forEach((element) => {
       // get posted date
       const postedDate = parseInt(element.others.posted_date);
@@ -132,7 +121,7 @@ const createCard = (info) => {
       
       const hours = parseInt(postedDate / 3600);
       const mins = parseInt((postedDate % 3600) / 60);
-      console.log(postedDate, hours, mins, isNot);
+      
       // create a div
       const card = document.createElement("div");
       card.classList = `card bg-base-100 shadow-xl `;
@@ -198,9 +187,6 @@ const toggleLoadingSpinner = (isLoading) => {
   }
 };
 
-// const sortByView = () => {
-
-// }
 
 // blog page link
 const blogPage = () => {
