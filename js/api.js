@@ -46,7 +46,6 @@ const displayCategories = (categories) => {
 
     // append child
     categoryDiv.appendChild(button);
-    
   });
 
   toggleLoadingSpinner(false);
@@ -102,8 +101,8 @@ const displayCards = (info) => {
   });
   createCard(info);
   toggleLoadingSpinner(false);
-  console.log(info);
-  console.log(typeof info);
+  // console.log(info);
+  // console.log(typeof info);
 };
 
 // Card creating function
@@ -127,20 +126,34 @@ const createCard = (info) => {
     // console.log(newInfo);
 
     info.forEach((element) => {
-      // console.log(element);
-
+      // get posted date
+      const postedDate = parseInt(element.others.posted_date);
+      const isNot = isNaN(postedDate);
+      
+      const hours = parseInt(postedDate / 3600);
+      const mins = parseInt((postedDate % 3600) / 60);
+      console.log(postedDate, hours, mins, isNot);
       // create a div
       const card = document.createElement("div");
-      card.classList = `card bg-base-100 shadow-xl`;
+      card.classList = `card bg-base-100 shadow-xl `;
 
       card.innerHTML = `
             
-            <figure>
+            <figure class = "relative">
               <img class="w-[312px] h-[200px]"
                 src="${element.thumbnail}"
                 alt=""
               />
+
+              <div class="flex flex-row justify-end absolute bottom-3 right-3">
+               ${
+                 isNot === true
+                   ? ""
+                   : `<p class = "text-center bg-[rgb(23,23,23)] p-1 text-[10px] text-white rounded">${hours}hrs ${mins} min ago</p>`
+               }
+              </div>
               </figure>
+              
               <div class="card-body p-0 py-5 pl-2 flex flex-row gap-3">
               <img
                 class="w-[40px] h-[40px] rounded-full"
